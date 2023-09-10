@@ -1,0 +1,30 @@
+int potPin=A5;
+float readVal;
+int alarm=9;
+float v;
+int bt=500;
+int bt1=250;
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(potPin,INPUT);
+  pinMode(alarm,OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  readVal=analogRead(potPin);
+  v=(5./1023.)*readVal;
+  Serial.print("VOLTAGE READING: ");
+  Serial.println(v);
+  delay(bt);
+
+  if(v>4.0){
+    Serial.println("YOU ARE EXCEEDING 4V!!!");
+    digitalWrite(alarm,HIGH);
+    delay(bt1);
+    digitalWrite(alarm,LOW);
+    delay(bt1);
+  }
+  digitalWrite(alarm,LOW);
+}
